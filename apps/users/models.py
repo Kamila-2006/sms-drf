@@ -1,7 +1,7 @@
 import random
 import uuid
 
-from common.validators import username_validator, validate_phone
+from apps.common.validators import username_validator, validate_phone
 from django.contrib.auth.base_user import AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin
 from django.core.cache import cache
@@ -9,7 +9,7 @@ from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from rest_framework_simplejwt.tokens import RefreshToken
-from users.managers import UserManager
+from .managers import UserManager
 
 
 class User(AbstractBaseUser, PermissionsMixin):

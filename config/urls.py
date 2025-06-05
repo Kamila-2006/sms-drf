@@ -41,6 +41,7 @@ urlpatterns = [
 
 urlpatterns += [
     path("api/v1/users/", include(("users.urls", "users"), "users")),
+    path('api/v1/shop/products/', include('products.urls'), name='products'),
 ]
 
 if django_settings_module == "development":
@@ -69,5 +70,4 @@ if django_settings_module == "development":
             schema_view.without_ui(cache_timeout=0),
             name="schema-json",
         ),
-        path('api/products/', include('products.urls'), name='products'),
     ]

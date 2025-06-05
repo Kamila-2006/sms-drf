@@ -1,4 +1,4 @@
-from common.exceptions import CodeResendError
+from apps.common.exceptions import CodeResendError
 from django.contrib.auth.base_user import BaseUserManager
 from rest_framework.exceptions import ValidationError
 
@@ -34,7 +34,7 @@ class UserManager(BaseUserManager):
     ):
         extra_fields.setdefault("is_staff", True)
         extra_fields.setdefault("is_superuser", True)
-        extra_fields.setdefault("role", self.model.Role.ADMIN)
+        # extra_fields.setdefault("role", self.model.Role.ADMIN)
 
         if extra_fields.get("is_staff") is not True:
             raise ValidationError("Superuser must have is_staff=True.")
