@@ -5,6 +5,7 @@ from .models import Category, Product
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ['id', 'name', 'slug']
+    exclude = ['slug']
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):

@@ -1,11 +1,11 @@
-from common.exceptions import (
+from apps.common.exceptions import (
     CodeError,
     CodeExpiredOrInvalid,
     PhoneNumberAlreadyExists,
     PhoneNumberNotFound,
     PhoneNumberNotVerified,
 )
-from common.validators import validate_phone
+from apps.common.validators import validate_phone
 from django.contrib.auth import get_user_model
 from django.core.cache import cache
 from rest_framework import serializers

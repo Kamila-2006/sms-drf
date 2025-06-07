@@ -5,12 +5,14 @@ from django.shortcuts import get_object_or_404
 from rest_framework.response import Response
 from .models import Product, Like
 from .serializers import ProductDetailSerializer, ProductsListSerializer
+from apps.common.pagination import CustomPagination
 
 
 class ProductsListView(generics.ListAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductsListSerializer
     permission_classes = [AllowAny]
+    pagination_class = CustomPagination
 
 class ProductDetailView(generics.RetrieveAPIView):
     queryset = Product.objects.all()
