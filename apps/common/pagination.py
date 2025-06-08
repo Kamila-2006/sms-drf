@@ -1,4 +1,5 @@
 from rest_framework.pagination import PageNumberPagination
+from rest_framework.response import Response
 
 
 class CustomPagination(PageNumberPagination):
@@ -7,7 +8,7 @@ class CustomPagination(PageNumberPagination):
     max_page_size = 100
 
     def get_paginated_response(self, data):
-        return {
+        return Response({
             'success': True,
             'data': data,
             'meta': {
@@ -23,4 +24,4 @@ class CustomPagination(PageNumberPagination):
                     }
                 }
             }
-        }
+        })
