@@ -50,24 +50,3 @@ class ProductDetailSerializer(serializers.ModelSerializer):
             'size': obj.size,
             'material': obj.material
         }
-
-# class MetaPaginationSerializer(serializers.Serializer):
-#     total = serializers.IntegerField()
-#     count = serializers.IntegerField()
-#     per_page = serializers.IntegerField()
-#     current_page = serializers.IntegerField()
-#     total_pages = serializers.IntegerField()
-#     links = serializers.SerializerMethodField()
-#
-#     def get_links(self, obj):
-#         links = {
-#             "next": obj['next'],
-#             "prev": obj['prev']
-#         }
-#         return links
-#
-#
-# class ResponseSerializer(serializers.Serializer):
-#     success = serializers.BooleanField()
-#     data = ProductsListSerializer(many=True)
-#     meta = MetaPaginationSerializer()
