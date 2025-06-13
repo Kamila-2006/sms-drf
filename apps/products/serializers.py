@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import Category, Product
+from django.db.models import Avg
 
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -10,7 +11,7 @@ class CategorySerializer(serializers.ModelSerializer):
 class ProductsListSerializer(serializers.ModelSerializer):
     category = serializers.PrimaryKeyRelatedField(queryset=Category.objects.all())
     likes_count = serializers.SerializerMethodField()
-    # average_rating =
+    average_rating = serializers.SerializerMethodField()
 
     class Meta:
         model = Product
@@ -21,11 +22,8 @@ class ProductsListSerializer(serializers.ModelSerializer):
         rep['category'] = CategorySerializer(instance.category).data
         return rep
 
-    # def get_average_rating(self, obj):
-    #     ratings = obj.reviews.all()
-    #     if ratings:
-    #         return sum(rating.score for rating in ratings) / len(ratings)
-    #     return 0
+    def get_average_rating(self, obj):
+        return obj.reviews.aggregate(avg=Avg('rating'))['avg'] or 0
 
     def get_likes_count(self, obj):
         return obj.likes.count()
