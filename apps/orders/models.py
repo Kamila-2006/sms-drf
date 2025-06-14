@@ -1,4 +1,5 @@
 from django.db import models
+from apps.products.models import Product
 
 
 class Order(models.Model):
@@ -18,4 +19,8 @@ class Order(models.Model):
     notes = models.TextField(blank=True, null=True)
     
 class OrderItem(models.Model):
-    pass
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='order-items')
+    quantity = models.PositiveIntegerField()
+    shipping_fee = models.PositiveIntegerField()
+    tracking_number = models.CharField(max_length=18)
+    order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='items')
