@@ -1,4 +1,4 @@
-from apps.common.utils.custom_response_decorator import custom_response
+from common.utils.custom_response_decorator import custom_response
 from django.contrib.auth import get_user_model
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework import generics, permissions, status
@@ -50,7 +50,6 @@ class AuthorizeAPIView(generics.GenericAPIView):
                 "message": "Verification code send success",
             }
         )
-
 
 @custom_response
 class VerifyAPIView(generics.GenericAPIView):

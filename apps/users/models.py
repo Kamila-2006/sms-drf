@@ -1,7 +1,6 @@
 import random
 import uuid
-
-from apps.common.validators import username_validator, validate_phone
+from common.validators import username_validator, validate_phone
 from django.contrib.auth.base_user import AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin
 from django.core.cache import cache

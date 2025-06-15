@@ -1,4 +1,4 @@
-from apps.common.exceptions import CodeResendError
+from common.exceptions import CodeResendError
 from django.contrib.auth.base_user import BaseUserManager
 from rest_framework.exceptions import ValidationError
 
