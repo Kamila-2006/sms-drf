@@ -87,3 +87,15 @@ class User(AbstractBaseUser, PermissionsMixin):
     @staticmethod
     def clear_cache(cache_key):
         cache.delete(key=cache_key)
+
+class UserProfile(models.Model):
+    phone = models.CharField(
+        max_length=12,
+        unique=True,
+        validators=[validate_phone],
+        null=True,
+    )
+    name = models.CharField(max_length=50)
+    email = models.EmailField(unique=True)
+    default_shipping_address = models.TextField()
+    date_joined = models.DateTimeField(auto_now_add=True)

@@ -11,6 +11,8 @@ from django.core.cache import cache
 from rest_framework import serializers
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
+from users.models import UserProfile
+
 User = get_user_model()
 
 
@@ -83,3 +85,9 @@ class ResetPasswordSerializer(serializers.Serializer):
         if value is None:
             raise PhoneNumberNotVerified
         return attrs
+
+class UserProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserProfile
+        fields = ['id', 'phone', 'name', 'email', 'default_shipping_address', 'date_joined']
+        read_only_fields = ['id', 'date_joined']
