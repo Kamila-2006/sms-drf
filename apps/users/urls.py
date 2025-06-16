@@ -8,6 +8,7 @@ from .views import (
     LogoutAPIView,
     ResetPasswordAPIView,
     VerifyAPIView,
+    UserProfileView,
 )
 
 urlpatterns = [
@@ -26,4 +27,5 @@ urlpatterns = [
         ResetPasswordAPIView.as_view(),
         name="reset_password",
     ),
+    path('<int:user_id>/profile/', UserProfileView.as_view(), name='user-profile'),
 ]

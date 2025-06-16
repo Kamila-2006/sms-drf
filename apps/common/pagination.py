@@ -32,17 +32,4 @@ class DetailCustomPagination(PageNumberPagination):
         return Response({
             'success': True,
             'data': data,
-            'meta': {
-                'pagination': {
-                    'total': self.page.paginator.count,
-                    'count': len(data),
-                    'per_page': self.page.paginator.per_page,
-                    'current_page': self.page.number,
-                    'total_pages': self.page.paginator.num_pages,
-                    'links': {
-                        'next': self.get_next_link(),
-                        'prev': self.get_previous_link()
-                    }
-                }
-            }
         })

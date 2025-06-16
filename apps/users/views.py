@@ -18,6 +18,8 @@ from .response_schema import (
     RESET_PASSWORD_SCHEMA_RESPONSE,
     VERIFY_SCHEMA_RESPONSE,
 )
+from common.pagination import DetailCustomPagination
+from .models import UserProfile
 from .serializers import (
     AuthorizeSerializer,
     ForgotPasswordSerializer,
@@ -25,6 +27,7 @@ from .serializers import (
     LogoutSerializer,
     ResetPasswordSerializer,
     VerifySerializer,
+    UserProfileSerializer,
 )
 
 User = get_user_model()
@@ -142,3 +145,9 @@ class ResetPasswordAPIView(generics.GenericAPIView):
                 "message": "Your password changed successfully",
             }
         )
+
+class UserProfileView(generics.RetrieveUpdateAPIView):
+    queryset = UserProfile.objects.all()
+    serializer_class = UserProfileSerializer
+    pagination_class = DetailCustomPagination
+    permission_classes = [permissions.IsAuthenticated]
