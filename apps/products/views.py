@@ -23,8 +23,8 @@ class ProductDetailView(generics.RetrieveAPIView):
 class ProductReactionView(APIView):
     permission_classes = [IsAuthenticated]
 
-    def post(self, request, slug):
-        product = get_object_or_404(Product, slug=slug)
+    def post(self, request, pk):
+        product = get_object_or_404(Product, pk=pk)
         value = request.data.get("value")
 
         if value not in ["like", "dislike"]:
