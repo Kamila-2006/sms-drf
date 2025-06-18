@@ -34,3 +34,34 @@ chmod +x start.sh
 ```commandline
 celery -A config worker --loglevel=info
 ```
+
+# ENDPOINTS
+
+# Users
+## POST api/v1/users/authorize/ - авторизация
+## POST api/v1/users/verify - проверка смс кода
+## POST api/v1/users/login - вход в систему
+## POST api/v1/users/logout - выход
+## POST api/v1/users/token/refresh/ - рефреш токен
+## POST api/v1/users/forgot-password/ - забыли пароль
+## POST api/v1/users/reset-password/ - восстановить пароль
+## GET api/v1/users/<id>/profile/ - посмотреть профиль юзера
+## PUT api/v1/users/<id>/profile/ - изменить профиль юзера
+
+# Products
+## GET api/v1/shop/products/ - список товаров
+## GET api/v1/shop/products/<id>/ - детали товара
+## POST api/v1/shop/products/<id>/like/ - лайкнуть товар
+
+# Cart
+## GET api/v1/shop/cart/ - корзина
+## POST api/v1/shop/cart/ - добавить товар в корзину
+## DELETE api/v1/shop/cart/ - убрать товар из корзины
+
+# Orders
+## GET api/v1/shop/orders/ - список заказов
+## POST api/v1/shop/orders/ - оформить заказ
+## GET api/v1/shop/orders/<id>/ - детали заказа
+
+# Reviews
+## POST api/v1/shop/products/<product_id>/review/ - оставить отзыв к товару
