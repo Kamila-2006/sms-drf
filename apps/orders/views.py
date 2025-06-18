@@ -1,10 +1,10 @@
 from rest_framework import generics
 from .models import Order
-from serializers import OrderListSerializer, OrderDetailSerializer
+from .serializers import OrderListSerializer, OrderDetailSerializer
 from common.pagination import CustomPagination, DetailCustomPagination
 
 
-class OrdersListView(generics.ListAPIView):
+class OrdersListCreateView(generics.ListCreateAPIView):
     queryset = Order.objects.all()
     serializer_class = OrderListSerializer
     pagination_class = CustomPagination

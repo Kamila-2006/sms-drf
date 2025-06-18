@@ -14,7 +14,7 @@ class OrderListSerializer(serializers.ModelSerializer):
         return obj.items.count()
 
 class OrderItemSerializer(serializers.ModelSerializer):
-    product = serializers.PrimaryKeyRelatedField(quryset=Product.objects.all())
+    product = serializers.PrimaryKeyRelatedField(queryset=Product.objects.all())
 
     class Meta:
         model = OrderItem
