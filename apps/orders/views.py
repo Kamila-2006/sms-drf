@@ -42,7 +42,7 @@ class OrderCreateView(generics.CreateAPIView):
                 product=item.product,
                 quantity=quantity,
                 shipping_fee=shipping_fee,
-                tracking_number=f'1Z{random.randint(10000000000000000, 99999999999999999)}'
+                tracking_number=f'{random.randint(10000000000000000, 99999999999999999)}'
             )
             subtotal += price * quantity
 
