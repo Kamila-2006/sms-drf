@@ -44,6 +44,7 @@ urlpatterns += [
     path('api/v1/shop/products/', include('products.urls'), name='products'),
     path('api/v1/shop/', include('reviews.urls'), name='reviews'),
     path('api/v1/shop/orders/', include('orders.urls'), name='orders'),
+    path('api/v1/shop/cart/', include('cart.urls'), name='cart'),
 ]
 
 if django_settings_module == "development":
