@@ -5,7 +5,6 @@ from .models import Order, OrderItem
 from .serializers import OrderListSerializer, OrderDetailSerializer
 from common.pagination import CustomPagination, DetailCustomPagination
 from cart.models import CartItem
-from django.utils.timezone import now
 import random
 
 
@@ -53,7 +52,7 @@ class OrderCreateView(generics.CreateAPIView):
 
         response_data = {
             "id": order.id,
-            "order_number": f"ORD-{now().strftime('%Y%m%d')}-{order.id}",
+            "order_number": f"ORD-{order.id}",
             "created_at": order.created_at,
             "updated_at": order.updated_at,
             "status": order.status,
@@ -65,7 +64,7 @@ class OrderCreateView(generics.CreateAPIView):
                         "id": item.product.id,
                         "title": item.product.title,
                         "price": item.product.price,
-                        "thumbnail": request.build_absolute_uri(item.product.images.url)
+                        "images": item.product.images
                     },
                     "quantity": item.quantity,
                     "price": item.product.price,

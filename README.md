@@ -45,13 +45,13 @@ celery -A config worker --loglevel=info
 ## POST api/v1/users/token/refresh/ - рефреш токен
 ## POST api/v1/users/forgot-password/ - забыли пароль
 ## POST api/v1/users/reset-password/ - восстановить пароль
-## GET api/v1/users/<id>/profile/ - посмотреть профиль юзера
-## PUT api/v1/users/<id>/profile/ - изменить профиль юзера
+## GET api/v1/users/id/profile/ - посмотреть профиль юзера
+## PUT api/v1/users/id/profile/ - изменить профиль юзера
 
 # Products
 ## GET api/v1/shop/products/ - список товаров
-## GET api/v1/shop/products/<id>/ - детали товара
-## POST api/v1/shop/products/<id>/like/ - лайкнуть товар
+## GET api/v1/shop/products/id/ - детали товара
+## POST api/v1/shop/products/id/like/ - лайкнуть товар
 
 # Cart
 ## GET api/v1/shop/cart/ - корзина
@@ -60,8 +60,8 @@ celery -A config worker --loglevel=info
 
 # Orders
 ## GET api/v1/shop/orders/ - список заказов
-## POST api/v1/shop/orders/ - оформить заказ
-## GET api/v1/shop/orders/<id>/ - детали заказа
+## POST api/v1/shop/orders/create/ - оформить заказ
+## GET api/v1/shop/orders/id/ - детали заказа
 
 # Reviews
-## POST api/v1/shop/products/<product_id>/review/ - оставить отзыв к товару
+## POST api/v1/shop/products/product_id/review/ - оставить отзыв к товару

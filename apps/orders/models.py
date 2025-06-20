@@ -12,6 +12,7 @@ class Order(models.Model):
         ('canceled', 'Canceled'),
     ]
 
+    order_number = models.CharField(max_length=15)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES)
