@@ -1,5 +1,8 @@
 import random
 import uuid
+
+from django.db.models import OneToOneField
+
 from common.validators import username_validator, validate_phone
 from django.contrib.auth.base_user import AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin
@@ -89,6 +92,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         cache.delete(key=cache_key)
 
 class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
     phone = models.CharField(
         max_length=12,
         unique=True,

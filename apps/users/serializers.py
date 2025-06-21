@@ -86,8 +86,27 @@ class ResetPasswordSerializer(serializers.Serializer):
             raise PhoneNumberNotVerified
         return attrs
 
+
 class UserProfileSerializer(serializers.ModelSerializer):
+    phone = serializers.CharField(source='user.phone', read_only=True)
+    date_joined = serializers.DateTimeField(source='user.date_joined', read_only=True)
+
     class Meta:
         model = UserProfile
         fields = ['id', 'phone', 'name', 'email', 'default_shipping_address', 'date_joined']
-        read_only_fields = ['id', 'date_joined']
+        read_only_fields = ['id', 'date_joined', 'phone']
+
+    def update(self, instance, validated_data):
+        user_data = validated_data.pop('user', {})
+
+        for attr, value in validated_data.items():
+            setattr(instance, attr, value)
+
+        if user_data:
+            user = instance.user
+            for attr, value in user_data.items():
+                setattr(user, attr, value)
+            user.save()
+
+        instance.save()
+        return instance

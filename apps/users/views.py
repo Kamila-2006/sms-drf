@@ -151,3 +151,12 @@ class UserProfileView(generics.RetrieveUpdateAPIView):
     serializer_class = UserProfileSerializer
     pagination_class = DetailCustomPagination
     permission_classes = [permissions.IsAuthenticated]
+
+    def get_object(self):
+        user = self.request.user
+        if not hasattr(user, 'profile'):
+            UserProfile.objects.create(user=user)
+        return user.profile
+
+    def put(self, request, *args, **kwargs):
+        return super().put(request, *args, **kwargs)
