@@ -18,7 +18,13 @@ class Order(models.Model):
     status = models.CharField(max_length=20, choices=STATUS_CHOICES)
     shipping_address = models.TextField()
     notes = models.TextField(blank=True, null=True)
-    
+
+    def subtotal(self):
+        return round(sum(item.subtotal() for item in self.items.all()), 2)
+
+    def total(self):
+        return self.subtotal() + sum(item.shipping_fee for item in self.items.all())
+
 class OrderItem(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='order_items')
     quantity = models.PositiveIntegerField()

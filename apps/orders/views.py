@@ -31,7 +31,6 @@ class OrderCreateView(generics.CreateAPIView):
             status='processing'
         )
 
-        subtotal = 0
         for item in cart_items:
             price = item.product.price
             quantity = item.quantity
@@ -43,41 +42,12 @@ class OrderCreateView(generics.CreateAPIView):
                 shipping_fee=shipping_fee,
                 tracking_number=f'{random.randint(10000000000000000, 99999999999999999)}'
             )
-            subtotal += price * quantity
 
         cart_items.delete()
 
-        shipping_fee = 5
-        total = round(subtotal + shipping_fee, 2)
+        serialized_order = OrderDetailSerializer(order).data
 
-        response_data = {
-            "id": order.id,
-            "order_number": f"ORD-{order.id}",
-            "created_at": order.created_at,
-            "updated_at": order.updated_at,
-            "status": order.status,
-            "shipping_address": order.shipping_address,
-            "notes": order.notes,
-            "items": [
-                {
-                    "product": {
-                        "id": item.product.id,
-                        "title": item.product.title,
-                        "price": item.product.price,
-                        "images": item.product.images
-                    },
-                    "quantity": item.quantity,
-                    "price": item.product.price,
-                    "subtotal": round(item.product.price * item.quantity, 2)
-                } for item in order.items.all()
-            ],
-            "subtotal": round(subtotal, 2),
-            "shipping_fee": shipping_fee,
-            "total": total,
-            "tracking_number": order.items.first().tracking_number  # пример
-        }
-
-        return Response({"success": True, "data": response_data}, status=status.HTTP_201_CREATED)
+        return Response({"success": True, "data": serialized_order}, status=status.HTTP_201_CREATED)
 
 class OrderDetailView(generics.RetrieveAPIView):
     queryset = Order.objects.all()

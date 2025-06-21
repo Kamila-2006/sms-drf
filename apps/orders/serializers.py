@@ -1,4 +1,6 @@
 from rest_framework import serializers
+
+from cart.serializers import ProductCartSerializer
 from .models import Order, OrderItem
 from products.models import Product
 
@@ -18,11 +20,14 @@ class OrderListSerializer(serializers.ModelSerializer):
         return f"ORD-{obj.id}"
 
 class OrderItemSerializer(serializers.ModelSerializer):
-    product = serializers.PrimaryKeyRelatedField(queryset=Product.objects.all())
+    product = ProductCartSerializer()
 
     class Meta:
         model = OrderItem
         fields = ['id', 'product', 'quantity', 'shipping_fee', 'tracking_number']
+
+    def get_subtotal(self, obj):
+        return obj.subtotal()
 
 class OrderDetailSerializer(serializers.ModelSerializer):
     items = OrderItemSerializer()
@@ -30,3 +35,9 @@ class OrderDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Order
         fields = ['id', 'order_number', 'created_at', 'updated_at', 'status', 'shipping_address', 'notes', 'items']
+
+    def get_subtotal(self, obj):
+        return obj.subtotal()
+
+    def get_total(self, obj):
+        return obj.total()
