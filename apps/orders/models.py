@@ -25,3 +25,6 @@ class OrderItem(models.Model):
     shipping_fee = models.PositiveIntegerField()
     tracking_number = models.CharField(max_length=18)
     order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='items')
+
+    def subtotal(self):
+        return self.product.price * self.quantity
