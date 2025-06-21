@@ -1,10 +1,13 @@
 from rest_framework.views import APIView
+from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from .models import CartItem
 from products.models import Product
 from .serializers import CartItemSerializer, CartAddSerializer
 from django.shortcuts import get_object_or_404
+
+
 
 class CartView(APIView):
     permission_classes = [IsAuthenticated]
@@ -39,3 +42,9 @@ class CartView(APIView):
         cart_item.save()
 
         return Response({"success": True, "message": "Product added to cart"})
+
+    def delete(self, request, product_id):
+        cart_item = get_object_or_404(CartItem, user=request.user, product__id=product_id)
+        cart_item.delete()
+
+        return Response({"success": True, "message": "Product removed from cart."}, status=status.HTTP_204_NO_CONTENT)
