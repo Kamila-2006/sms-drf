@@ -45,8 +45,8 @@ celery -A config worker --loglevel=info
 ## POST api/v1/users/token/refresh/ - рефреш токен
 ## POST api/v1/users/forgot-password/ - забыли пароль
 ## POST api/v1/users/reset-password/ - восстановить пароль
-## GET api/v1/users/id/profile/ - посмотреть профиль юзера
-## PUT api/v1/users/id/profile/ - изменить профиль юзера
+## GET api/v1/users/profile/ - посмотреть профиль юзера
+## PUT api/v1/users/profile/ - изменить профиль юзера
 
 # Products
 ## GET api/v1/shop/products/ - список товаров
@@ -56,7 +56,7 @@ celery -A config worker --loglevel=info
 # Cart
 ## GET api/v1/shop/cart/ - корзина
 ## POST api/v1/shop/cart/ - добавить товар в корзину
-## DELETE api/v1/shop/cart/ - убрать товар из корзины
+## DELETE api/v1/shop/cart/product_id - убрать товар из корзины
 
 # Orders
 ## GET api/v1/shop/orders/ - список заказов
