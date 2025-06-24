@@ -30,7 +30,7 @@ class OrderItemSerializer(serializers.ModelSerializer):
         return obj.subtotal()
 
 class OrderDetailSerializer(serializers.ModelSerializer):
-    items = OrderItemSerializer()
+    items = OrderItemSerializer(many=True)
 
     class Meta:
         model = Order
